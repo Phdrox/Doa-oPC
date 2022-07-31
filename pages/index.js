@@ -5,7 +5,7 @@ import Success from "./Success";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Invalido from "./Invalido";
-import Loading from "./Loading";
+
 
 export default function DoacaoPc(){
 const router=useRouter();
