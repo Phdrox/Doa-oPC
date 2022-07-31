@@ -24,16 +24,13 @@ const[complement,setComplement]=useState('');
 const[neighborhood,setDistrict]=useState('');
 const[type,setType]=useState('');
 const[condition,setCondition]=useState('');
-const[deviceCount,setDevice]=useState(0);
+const[deviceCount,setDevice]=useState('');
 const[Loading,setLoading]=useState(false);
 
 
 //Busca Cep
-
 function Cep(e){
-
 const cep =e.target.value.replace(/\D/g,'');
-
 setLoading(true)
 axios.get(`https://ws.apicep.com/cep/${cep}.json`)
 .then( 
@@ -158,7 +155,7 @@ return(
     <input type="text" name ='neighborhood' {...register("neighborhood")} required onChange={(e)=>setDistrict(e.target.value)}/><br/><br/>
 
     <label htmlFor="deviceCount" >Quantidade de dispositivo</label><br/>
-<input  type="number" name='deviceCount'{...register("deviceCount")}   min='1' max='999' required  onChange={(e)=>setDevice(e.target.value)}/><br/><br/>
+<input  type="string" name='deviceCount'{...register("deviceCount")} pattern='[0-9]+$'  min='1' max='999' required  onChange={(e)=>setDevice(e.target.value)}/><br/><br/>
 {devices.map((dev,i)=>(
 <div key={i}>{dev.device}</div>
 ))}
