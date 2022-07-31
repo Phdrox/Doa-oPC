@@ -83,7 +83,8 @@ router.push('/Error')
 )}
 
 //Estrutura do Form Devices
-const estrutura=(<fieldset key={type}>
+const estrutura=(
+<fieldset key={type}>
     <legend>Devices</legend>
         <select name='type' onChange={(e)=>setType(e.target.value)} required>
             <option {...register("type")} value='notebook'>Notebook</option>
@@ -96,11 +97,13 @@ const estrutura=(<fieldset key={type}>
         
         <br/>
         <br/>
-
-        <input name='condition' onChange={(e)=>setCondition(e.target.value)} {...register("condition")} type='radio' value='working' required/><label>Tem todas as partes, liga e funciona normalmente</label><br/>
-        <input name='condition' onChange={(e)=>setCondition(e.target.value)} {...register("condition")} type='radio' value='notWorking' required /><label>Tem todas as partes, mas não liga mais</label><br/>
-        <input name='condition' onChange={(e)=>setCondition(e.target.value)} {...register("condition")} type='radio' value='broken'  required/><label>Faltam peças, funciona só as vezes ou está quebrado</label><br/>
-  </fieldset>
+        <select name='condition'  onChange={(e)=>setCondition(e.target.value)} required >
+        <option {...register("condition")} value='working'>Tem todas as partes, liga e funciona normalmente</option>
+        <option {...register("condition")} value='notWorking'>Tem todas as partes, mas não liga mais</option>
+        <option {...register("condition")} value='broken'>Faltam peças, funciona só as vezes ou está quebrado</option>
+       </select> 
+ 
+ </fieldset>
   );
 
 //Função de Add a estrutura através do Botão 
@@ -155,7 +158,7 @@ return(
     <input type="text" name ='neighborhood' {...register("neighborhood")} required onChange={(e)=>setDistrict(e.target.value)}/><br/><br/>
 
     <label htmlFor="deviceCount" >Quantidade de dispositivo</label><br/>
-<input  type="string" name='deviceCount'{...register("deviceCount")} pattern='[0-9]+$'  min='1' max='999' required  onChange={(e)=>setDevice(e.target.value)}/><br/><br/>
+<input  type="string" name='deviceCount'{...register("deviceCount")} pattern='[0-9]+$' min='1' max='999' required  onChange={(e)=>setDevice(e.target.value)}/><br/><br/>
 {devices.map((dev,i)=>(
 <div key={i}>{dev.device}</div>
 ))}
