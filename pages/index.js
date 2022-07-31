@@ -8,6 +8,8 @@ import Invalido from "./Invalido";
 
 
 export default function DoacaoPc(){
+
+//Identificadores,valores,rotas
 const router=useRouter();
 const{register,handleSubmit,setValue}=useForm()
 const[name,setName]=useState('');
@@ -22,7 +24,7 @@ const[complement,setComplement]=useState('');
 const[neighborhood,setDistrict]=useState('');
 const[type,setType]=useState('');
 const[condition,setCondition]=useState('');
-const[deviceCount,setDevice]=useState(null);
+const[deviceCount,setDevice]=useState(0);
 const[Loading,setLoading]=useState(false);
 
 
@@ -32,8 +34,6 @@ function Cep(e){
 
 const cep =e.target.value.replace(/\D/g,'');
 
-
-  
 setLoading(true)
 axios.get(`https://ws.apicep.com/cep/${cep}.json`)
 .then( 
@@ -47,21 +47,17 @@ axios.get(`https://ws.apicep.com/cep/${cep}.json`)
   
   if(data.data.status===400){
   alert('CEP inválido ou muitas ou muitas requisições feitas')}
-
-  document.getElementById('number').focus();
+ document.getElementById('number').focus();
   }
 ).catch(
 (erro)=>{
   console.log(erro)
-}
-)
-}
+})}
 
 
 //Função Submit 
 function onSubmit(send){
-
-  const data={
+const data={
     name:name,
     email:email,
     phone:phone,
@@ -78,20 +74,16 @@ function onSubmit(send){
   }
 
 axios.post('https://doar-computador-api.herokuapp.com/donation',data)
-.then(()=>router.push('/Success')
-
-)
+.then(()=>router.push('/Success'))
 .catch((erro)=> {
 
-  if(erro==400){
+if(erro==400){
   router.push('/Invalido')
 }else{
 router.push('/Error')
 }
-
 }
-)
-}
+)}
 
 //Estrutura do Form Devices
 const estrutura=(<fieldset key={type}>
@@ -114,9 +106,8 @@ const estrutura=(<fieldset key={type}>
   </fieldset>
   );
 
-const[devices,setDevices]=useState([{device:[estrutura]}]);
-
 //Função de Add a estrutura através do Botão 
+const[devices,setDevices]=useState([{device:[estrutura]}]);
 function add(e){
 e.preventDefault()
 setDevices([...devices,{device:estrutura}])
@@ -181,17 +172,6 @@ return(
   
   </div> 
 )
-
-
-   
-  
-
-
-
-
- 
-  
-      
 
 }
   
